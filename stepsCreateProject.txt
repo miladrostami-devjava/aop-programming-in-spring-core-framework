@@ -1,0 +1,19 @@
+1. pom.xml
+2.create model
+3. create Loggable annotate for setMethod in entity
+4.create service for entity
+5. create xml file , springAop file for define beans
+6. add to xml file :::
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   <aop:aspectj-autoproxy/>
+
+   7.make StudentAspect class for define before advice
+8. make StudentAspectPointCut class for  have to use same Pointcut expression at multiple places
+9. make StudentAspectJoinPoint use JoinPoint as a parameter in
+the advice methods and using it get the method signature or the target object
+10. make StudentAfterAspect class
+11. make StudentAroundAspect class
+12.  make Loggable ,, Spring Advice with Custom Annotation Pointcut
+13. make StudentAnnotationAspect class
+14.make StudentXMLConfigAspect class, Spring AOP XML Configuration
+15. Spring Bean config file,Spring AOP XML Configuration:::

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+<aop:aspectj-autoproxy/>
+    <!-- Enable AspectJ style of Spring AOP -->
+
+    <bean name="student" class="org.example.model.Student">
+        <property name="name" value="Dummy name"> </property>
+    </bean>
+<bean name="studentService" class="org.example.service.StudentService">
+    <property name="student"  value="Dummy Name"></property>
+</bean>
+    <!-- Configure Aspect Beans, without this Aspects advices wont execute -->
+<bean class="org.example.aspects.StudentAfterAspect" id="afterAspect"/>
+    <bean class="org.example.aspects.StudentAnnotationAspect" id="annotationAspect"/>
+    <bean class="org.example.aspects.StudentAroundAspect" id="aroundAspect"/>
+    <bean class="org.example.aspects.StudentAspect" id="studentAspect"/>
+    <bean class="org.example.aspects.StudentAspectJoinPoint" id="aspectJoinPoint"/>
+    <bean class="org.example.aspects.StudentAspectPointcut" id="aspectPointcut"/>
+    <bean class="org.example.aspects.StudentXMLConfigAspect" id="studentXMLConfigAspect"/>
+
+
+    <!--Config the aop in xml -->
+<aop:config>
+<aop:aspect ref="studentXMLConfigAspect" id="studentXML" order="1">
+    <aop:pointcut id="getNameMethodStudent" expression="execution(* org.example.model.Student.getName())"/>
+<aop:around method="studentAroundAdvice" pointcut-ref="getNameMethodStudent" arg-names="proceedingJoinPoint"/>
+
+</aop:aspect>
+</aop:config>
+
+</beans>
